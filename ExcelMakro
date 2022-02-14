@@ -1,0 +1,61 @@
+Option Explicit
+
+Private repeat As Integer
+
+Private Sub Worksheet_Change(ByVal Target As Range)
+
+If repeat = 0 Then
+    Call werteUmwandeln(Target, 2, 6, 3, 25)
+Else
+    repeat = 0
+    Exit Sub
+End If
+
+
+End Sub
+
+Private Sub werteUmwandeln(ByVal Zelle As Range, ByVal ersteSpalte As Integer, ByVal ersteZeile As Integer, letzteSpalte As Integer, ByVal letzteZeile As Integer) 'Hier kann der Bereich angegeben werden, in dem die Zahlenumrechnung statffinden soll
+Dim newHour As Date, newMinute As Date, newSecond As Date, waitTime As Date
+On Error Resume Next
+Dim komma As Single
+Dim zeiten() As String
+Dim Ganzzahl As Integer
+Dim Zellenwert As Double
+Dim ergebnis As String
+Dim ausgabe As Single
+
+newHour = Hour(Now())
+newMinute = Minute(Now())
+newSecond = Second(Now()) + 1
+waitTime = TimeSerial(newHour, newMinute, newSecond)
+
+zeiten = Split(Zelle, "&") 'Hier kann man statt dem "&" eben auch ein anderes Trennzeichen angeben.
+Ganzzahl = zeiten(0)       'Man darf aber nicht vergessen, es dann auch bei der InStr-Funktion zu ändern.
+komma = "0," & zeiten(1)   'Außerdem muss dann auch die Messagebox angepasst werden.
+
+
+If Zelle.Column >= ersteSpalte And Zelle.Row >= ersteZeile And Zelle.Column <= letzteSpalte And Zelle.Row <= letzteZeile And Cells(Zelle.Row, Zelle.Column).Value <> "" Then
+    If InStr(Zelle, "&") = False Or Ganzzahl > 23 Or Ganzzahl < 0 Then '<- Hier ist die InStr-Funktion an erster Stelle
+        MsgBox "Die Eingabe ist ungültig." & vbCr & vbCr & "Bitte geben Sie mit einem kaufmännischen & getrennt die Stundenzahl und Minutenzahl an."
+        Zelle.Value = ""
+        Exit Sub
+    End If
+    
+    If komma > 0.59 Or komma < 0 Then
+        MsgBox "Bitte Minutenwerte nur von 0 bis 59 eingeben."
+        Zelle.Value = ""
+        End
+    End If
+    
+    
+    komma = komma * 1.6666666666
+    ergebnis = Ganzzahl + komma
+    ausgabe = CSng(ergebnis)
+    repeat = 1
+    Application.Wait waitTime
+    Cells(Zelle.Row, Zelle.Column).Value = ausgabe
+    Zelle.Font.ColorIndex = 50                                                            
+End If
+                    
+End Sub
+
