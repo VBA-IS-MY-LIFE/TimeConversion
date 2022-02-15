@@ -1,5 +1,5 @@
 # TimeConversion
-It's a functionality for converting time-values into Decimal Values
+It's a functionality for converting time-values into Decimal Values.
 
 You can determine an area within an Excel-Sheet for this functionality.
 
