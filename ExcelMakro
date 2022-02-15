@@ -3,9 +3,15 @@ Option Explicit
 Private repeat As Integer
 
 Private Sub Worksheet_Change(ByVal Target As Range)
+Dim ersteZeile As Integer, ersteSpalte As Integer, letzteZeile As Integer, letzteSpalte As Integer
+
+ersteZeile = 2 'Hier kann man den Bereich angeben, in dem das Makro aktiv werden soll.
+ersteSpalte = 1
+letzteZeile = 31
+letzteSpalte = 2
 
 If repeat = 0 Then
-    Call werteUmwandeln(Target, 2, 6, 3, 25)
+    Call werteUmwandeln(Target, ersteSpalte, ersteZeile, letzteSpalte, letzteZeile)
 Else
     repeat = 0
     Exit Sub
@@ -54,8 +60,9 @@ If Zelle.Column >= ersteSpalte And Zelle.Row >= ersteZeile And Zelle.Column <= l
     repeat = 1
     Application.Wait waitTime
     Cells(Zelle.Row, Zelle.Column).Value = ausgabe
-    Zelle.Font.ColorIndex = 50                                                            
+    Zelle.Font.ColorIndex = 50
 End If
-                    
+
+
 End Sub
 
