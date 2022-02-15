@@ -17,7 +17,6 @@ Else
     Exit Sub
 End If
 
-
 End Sub
 
 Private Sub werteUmwandeln(ByVal Zelle As Range, ByVal ersteSpalte As Integer, ByVal ersteZeile As Integer, letzteSpalte As Integer, ByVal letzteZeile As Integer) 'Hier kann der Bereich angegeben werden, in dem die Zahlenumrechnung statffinden soll
