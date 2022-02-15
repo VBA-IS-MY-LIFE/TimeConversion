@@ -24,24 +24,27 @@ Private Sub werteUmwandeln(ByVal Zelle As Range, ByVal ersteSpalte As Integer, B
 Dim newHour As Date, newMinute As Date, newSecond As Date, waitTime As Date
 On Error Resume Next
 Dim komma As Single
-Dim zeiten() As String
+Dim zeiten() As String, trennzeichen As String
 Dim Ganzzahl As Integer
 Dim Zellenwert As Double
 Dim ergebnis As String
 Dim ausgabe As Single
+
+
+trennzeichen = "&" 'Hier kann man statt dem "&" eben auch ein anderes Trennzeichen angeben.
 
 newHour = Hour(Now())
 newMinute = Minute(Now())
 newSecond = Second(Now()) + 1
 waitTime = TimeSerial(newHour, newMinute, newSecond)
 
-zeiten = Split(Zelle, "&") 'Hier kann man statt dem "&" eben auch ein anderes Trennzeichen angeben.
-Ganzzahl = zeiten(0)       'Man darf aber nicht vergessen, es dann auch bei der InStr-Funktion zu ändern.
-komma = "0," & zeiten(1)   'Außerdem muss dann auch die Messagebox angepasst werden.
+zeiten = Split(Zelle, trennzeichen)
+Ganzzahl = zeiten(0)
+komma = "0," & zeiten(1)
 
 
 If Zelle.Column >= ersteSpalte And Zelle.Row >= ersteZeile And Zelle.Column <= letzteSpalte And Zelle.Row <= letzteZeile And Cells(Zelle.Row, Zelle.Column).Value <> "" Then
-    If InStr(Zelle, "&") = False Or Ganzzahl > 23 Or Ganzzahl < 0 Then '<- Hier ist die InStr-Funktion an erster Stelle
+    If InStr(Zelle, trennzeichen) = False Or Ganzzahl > 23 Or Ganzzahl < 0 Then '<- Hier ist die InStr-Funktion an erster Stelle
         MsgBox "Die Eingabe ist ungültig." & vbCr & vbCr & "Bitte geben Sie mit einem kaufmännischen & getrennt die Stundenzahl und Minutenzahl an."
         Zelle.Value = ""
         Exit Sub
