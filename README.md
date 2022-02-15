@@ -1,9 +1,9 @@
 # TimeConversion
-It's a functionality for converting time-values into Decimal Values.
+It's a functionality for converting time-values into decimal Values.
 
 You can determine an area within an Excel-Sheet for this functionality.
 
-Also, you can determine the delimiter. If you change it into something like "-" or ",", it could cause trouble.
+Also, you can determine the delimiter. Bur if you change it into something like "-" or ",", it could cause trouble.
 
 It's useful for Time-Sheets.
 
