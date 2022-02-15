@@ -23,10 +23,10 @@ Private Sub werteUmwandeln(ByVal Zelle As Range, ByVal ersteSpalte As Integer, B
 Dim newHour As Date, newMinute As Date, newSecond As Date, waitTime As Date
 On Error Resume Next
 Dim komma As Single
-Dim zeiten() As String, trennzeichen As String
+Dim zeiten() As String
 Dim Ganzzahl As Integer
 Dim Zellenwert As Double
-Dim ergebnis As String
+Dim ergebnis As String, trennzeichen As String
 Dim ausgabe As Single
 
 
