@@ -34,7 +34,7 @@ trennzeichen = "&" 'Hier kann man statt dem "&" eben auch ein anderes Trennzeich
 
 newHour = Hour(Now())
 newMinute = Minute(Now())
-newSecond = Second(Now()) + 1
+newSecond = Second(Now()) + 1 'Statt der 1 kann man hier auch eine andere Wartezeit eingeben. Die 1 entspricht eine Sekunde.
 waitTime = TimeSerial(newHour, newMinute, newSecond)
 
 zeiten = Split(Zelle, trennzeichen)
@@ -60,7 +60,7 @@ If Zelle.Column >= ersteSpalte And Zelle.Row >= ersteZeile And Zelle.Column <= l
     ergebnis = Ganzzahl + komma
     ausgabe = CSng(ergebnis)
     repeat = 1
-    Application.Wait waitTime
+    Application.Wait waitTime 'Hier wartet das Programm eine Sekunde, da sonst vielleicht die Umwandlug für den Benutzer zu schnell ist und nicht wahrgenommen wird.
     Cells(Zelle.Row, Zelle.Column).Value = ausgabe
     Zelle.Font.ColorIndex = 50
 End If
