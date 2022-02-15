@@ -43,7 +43,7 @@ komma = "0," & zeiten(1)
 
 
 If Zelle.Column >= ersteSpalte And Zelle.Row >= ersteZeile And Zelle.Column <= letzteSpalte And Zelle.Row <= letzteZeile And Cells(Zelle.Row, Zelle.Column).Value <> "" Then
-    If InStr(Zelle, trennzeichen) = False Or Ganzzahl > 23 Or Ganzzahl < 0 Then '<- Hier ist die InStr-Funktion an erster Stelle
+    If InStr(Zelle, trennzeichen) = False Or Ganzzahl > 23 Or Ganzzahl < 0 Then
         MsgBox "Die Eingabe ist ungültig." & vbCr & vbCr & "Bitte geben Sie mit einem kaufmännischen & getrennt die Stundenzahl und Minutenzahl an."
         Zelle.Value = ""
         Exit Sub
