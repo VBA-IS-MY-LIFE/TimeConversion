@@ -1,5 +1,4 @@
 Option Explicit
-
 Private repeat As Integer
 
 Private Sub Worksheet_Change(ByVal Target As Range)
@@ -17,6 +16,7 @@ Else
     Exit Sub
 End If
 
+
 End Sub
 
 Private Sub werteUmwandeln(ByVal Zelle As Range, ByVal ersteSpalte As Integer, ByVal ersteZeile As Integer, letzteSpalte As Integer, ByVal letzteZeile As Integer)
@@ -24,21 +24,24 @@ Dim newHour As Date, newMinute As Date, newSecond As Date, waitTime As Date
 On Error Resume Next
 Dim komma As Single
 Dim zeiten() As String
+Dim istZahl As Boolean
 Dim Ganzzahl As Integer
 Dim Zellenwert As Double
 Dim ergebnis As String, trennzeichen As String
 Dim ausgabe As Single
 
 
-trennzeichen = "&" 'Hier kann man statt dem "&" eben auch ein anderes Trennzeichen angeben.
+trennzeichen = "&" 'Hier kann man statt dem "&" eben auch ein anderes Trennzeichen angeben. Es sollte aber kein "-" oder "," sein.
 
 newHour = Hour(Now())
 newMinute = Minute(Now())
-newSecond = Second(Now()) + 1 'Statt der 1 kann man hier auch eine andere Wartezeit eingeben. Die 1 entspricht eine Sekunde.
+newSecond = Second(Now()) + 1 'Hier kann man statt der Eins auch einen anderen ganzzahligen und höheren Wert angeben. Die 1 entspricht eine Sekunde
 waitTime = TimeSerial(newHour, newMinute, newSecond)
 
 zeiten = Split(Zelle, trennzeichen)
 Ganzzahl = zeiten(0)
+
+
 komma = "0," & zeiten(1)
 
 
@@ -48,8 +51,10 @@ If Zelle.Column >= ersteSpalte And Zelle.Row >= ersteZeile And Zelle.Column <= l
         Zelle.Value = ""
         Exit Sub
     End If
-    
-    If komma > 0.59 Or komma < 0 Then
+      
+      
+    istZahl = IsNumeric(zeiten(1))
+    If komma > 0.59 Or komma < 0 Or istZahl = False Then
         MsgBox "Bitte Minutenwerte nur von 0 bis 59 eingeben."
         Zelle.Value = ""
         End
@@ -60,7 +65,7 @@ If Zelle.Column >= ersteSpalte And Zelle.Row >= ersteZeile And Zelle.Column <= l
     ergebnis = Ganzzahl + komma
     ausgabe = CSng(ergebnis)
     repeat = 1
-    Application.Wait waitTime 'Hier wartet das Programm eine Sekunde, da sonst vielleicht die Umwandlug für den Benutzer zu schnell ist und nicht wahrgenommen wird.
+    Application.Wait waitTime
     Cells(Zelle.Row, Zelle.Column).Value = ausgabe
     Zelle.Font.ColorIndex = 50
 End If
