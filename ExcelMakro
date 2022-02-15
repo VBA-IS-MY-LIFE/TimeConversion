@@ -19,7 +19,7 @@ End If
 
 End Sub
 
-Private Sub werteUmwandeln(ByVal Zelle As Range, ByVal ersteSpalte As Integer, ByVal ersteZeile As Integer, letzteSpalte As Integer, ByVal letzteZeile As Integer) 'Hier kann der Bereich angegeben werden, in dem die Zahlenumrechnung statffinden soll
+Private Sub werteUmwandeln(ByVal Zelle As Range, ByVal ersteSpalte As Integer, ByVal ersteZeile As Integer, letzteSpalte As Integer, ByVal letzteZeile As Integer)
 Dim newHour As Date, newMinute As Date, newSecond As Date, waitTime As Date
 On Error Resume Next
 Dim komma As Single
