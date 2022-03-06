@@ -31,7 +31,7 @@ Dim ergebnis As String, trennzeichen As String
 Dim ausgabe As Single
 
 
-trennzeichen = "&" 'Hier kann man statt dem "&" eben auch ein anderes Trennzeichen angeben. Es sollte aber kein "-" oder "," sein.
+trennzeichen = "&" 'Hier kann man statt dem "&" eben auch ein anderes Trennzeichen angeben.
 
 newHour = Hour(Now())
 newMinute = Minute(Now())
