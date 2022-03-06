@@ -1,5 +1,5 @@
 Option Explicit
-Private repeat As Integer
+Private repeat As Boolean
 
 Private Sub Worksheet_Change(ByVal Target As Range)
 Dim ersteZeile As Integer, ersteSpalte As Integer, letzteZeile As Integer, letzteSpalte As Integer
@@ -9,10 +9,10 @@ ersteSpalte = 1
 letzteZeile = 31
 letzteSpalte = 2
 
-If repeat = 0 Then
+If repeat = False Then
     Call werteUmwandeln(Target, ersteSpalte, ersteZeile, letzteSpalte, letzteZeile)
 Else
-    repeat = 0
+    repeat = False
     Exit Sub
 End If
 
@@ -64,7 +64,7 @@ If Zelle.Column >= ersteSpalte And Zelle.Row >= ersteZeile And Zelle.Column <= l
     komma = komma * 1.6666666666
     ergebnis = Ganzzahl + komma
     ausgabe = CSng(ergebnis)
-    repeat = 1
+    repeat = True
     Application.Wait waitTime
     Cells(Zelle.Row, Zelle.Column).Value = ausgabe
     Zelle.Font.ColorIndex = 50
